@@ -97,6 +97,7 @@ rl.on('line', function(line) {
 	  	case "1":
 	  		codeninja.attack(ogre);
 	  		console.log(codeninja.hp);
+	  		if()
 	  		break;
 	  	case "2":
 	  		codeninja.playCards([Math.floor(Math.random() * packCards.values.length)]);

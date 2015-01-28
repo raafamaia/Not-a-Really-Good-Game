@@ -7,6 +7,7 @@ function Character(name, hp, weapon, shield, strength, defense){
 	this.shield = shield;
 	this.strength = (strength === undefined) ? 10 : strength;
 	this.defense = (defense === undefined) ? 10 : defense;
+	this.alive = true;
 }
 
 Character.prototype = {
@@ -25,6 +26,10 @@ Character.prototype = {
 			+ ((target.shield === undefined) ? 0 : target.shield.defense));
 
 			target.lostHP(dmg);
+			if(target.checkDead()){
+				target.alive = false;
+				return "The great " + target.name + " is dead!";
+			}
 			return target.name + " received " + dmg + " damage";
 		}
 	},
@@ -50,6 +55,13 @@ Character.prototype = {
 	stats: function(){
 		var message = this.name + " stats: \nhp - " + this.hp;
 		return message;
+	},
+
+	checkDead: function(){
+		if (this.hp <= 0){
+			return true;
+		}
+		return false;
 	}
 };
 

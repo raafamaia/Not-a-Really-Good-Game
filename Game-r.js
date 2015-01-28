@@ -1,4 +1,6 @@
- // U3.W7: Design your own Code Combat Mission
+'use strict'
+
+// U3.W7: Design your own Code Combat Mission
 
 // This is a solo challenge
 
@@ -41,8 +43,7 @@ rl.on('line', function(line) {
     switch(line){
 	  	case "1":
 	  		console.log(player.attack(ogre));
-	  		console.log(player.stats());
-	  		console.log(ogre.stats());
+	  		if(ogre.alive === false || player.alive === false) rl.close();
 	  		break;
 	  	// case "2":
 	  	// 	codeninja.playCards([Math.floor(Math.random() * packCards.values.length)]);
@@ -51,6 +52,9 @@ rl.on('line', function(line) {
 	  	default:
 	  		console.log("Opção Inválida");
 	  }
+
+		console.log(player.stats());
+		console.log(ogre.stats());
 
 }).on('close',function(){
     process.exit(0);
