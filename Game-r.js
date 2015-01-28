@@ -20,7 +20,7 @@
 
 // Initial Code
 
-var Weapon = require('./models/Weapon')
+var Weapon = require('./models/Weapon');
 var Shield = require('./models/Shield');
 var Player = require('./models/Player');
 var Ogre = require('./models/Ogre');
