@@ -29,7 +29,7 @@ var Ogre = require('./models/Ogre');
 
 var defaultWeapon = new Weapon("Sword", 5, 15);
 var defaultShield = new Shield("Shield", 5, 5);
-var ogre = new Ogre("Ogre", 200);
+var ogre = new Ogre("Ogre", 200, defaultWeapon, defaultShield);
 var player = new Player("You", 200, defaultWeapon, defaultShield);
 
 //------------------------------------------------------------------------------
@@ -37,25 +37,28 @@ var player = new Player("You", 200, defaultWeapon, defaultShield);
 function Main(){
 var readline = require('readline');
 var rl = readline.createInterface(process.stdin, process.stdout);
-rl.setPrompt("1 - Attack \n2 - Play Cards\n");
+rl.setPrompt("1 - Attack \n2 - Play Cards\n3 - Stats\n");
 rl.prompt();
 rl.on('line', function(line) {
     switch(line){
 	  	case "1":
 	  		console.log(player.attack(ogre));
 	  		if(ogre.alive === false || player.alive === false) rl.close();
+				console.log(player.stats());
+				console.log(ogre.stats());
 	  		break;
-	  	// case "2":
-	  	// 	codeninja.playCards([Math.floor(Math.random() * packCards.values.length)]);
-	  	// 	rl.close();
-	  	// 	break;
+	  	case "2":
+	  		//codeninja.playCards([Math.floor(Math.random() * packCards.values.length)]);
+	  		//rl.close();
+	  		break;
+	  	case "3":
+	  		console.log(player.toString());
+	  		console.log("---------------------------");
+	  		console.log(ogre.toString());
+	  		break;
 	  	default:
 	  		console.log("Opção Inválida");
 	  }
-
-		console.log(player.stats());
-		console.log(ogre.stats());
-
 }).on('close',function(){
     process.exit(0);
 });
