@@ -48,8 +48,16 @@ rl.on('line', function(line) {
 				console.log(ogre.stats());
 	  		break;
 	  	case "2":
-	  		//codeninja.playCards([Math.floor(Math.random() * packCards.values.length)]);
-	  		//rl.close();
+	  		ogre.challenge();
+	  		rl.question("Huh, Choose Human! 1, 2 or 3?\n", function(answer){
+					if(ogre.arr[answer - 1]){
+						console.log(ogre.arr);
+	  				console.log("YOU WON, DAMN IT CHLOE");
+	  			} else {
+	  				console.log("SUCK IT BITCH, GAME OVER!");
+	  			}
+	  			rl.close();
+	  		});
 	  		break;
 	  	case "3":
 	  		console.log(player.toString());
