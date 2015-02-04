@@ -1,4 +1,4 @@
 # Not-a-Really-Good-Game
 NRGG
 
-Just a "have no idea what I'm doing" game.
+Just an "I have no idea what I'm doing" game.
