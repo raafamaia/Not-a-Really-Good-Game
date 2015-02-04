@@ -35,41 +35,41 @@ var player = new Player("You", 200, defaultWeapon, defaultShield);
 //------------------------------------------------------------------------------
 
 function Main(){
-var readline = require('readline');
-var rl = readline.createInterface(process.stdin, process.stdout);
-rl.setPrompt("1 - Attack \n2 - Play Cards\n3 - Stats\n");
-rl.prompt();
-rl.on('line', function(line) {
-    switch(line){
-	  	case "1":
-	  		console.log(player.attack(ogre));
-	  		if(ogre.alive === false || player.alive === false) rl.close();
-				console.log(player.stats());
-				console.log(ogre.stats());
-	  		break;
-	  	case "2":
-	  		ogre.challenge();
-	  		rl.question("Huh, Choose Human! 1, 2 or 3?\n", function(answer){
-					if(ogre.arr[answer - 1]){
-						console.log(ogre.arr);
-	  				console.log("YOU WON, DAMN IT CHLOE");
-	  			} else {
-	  				console.log("SUCK IT BITCH, GAME OVER!");
-	  			}
-	  			rl.close();
-	  		});
-	  		break;
-	  	case "3":
-	  		console.log(player.toString());
-	  		console.log("---------------------------");
-	  		console.log(ogre.toString());
-	  		break;
-	  	default:
-	  		console.log("Opção Inválida");
-	  }
-}).on('close',function(){
-    process.exit(0);
-});
+	var readline = require('readline');
+	var rl = readline.createInterface(process.stdin, process.stdout);
+	rl.setPrompt("1 - Attack \n2 - Play Cards\n3 - Stats\n");
+	rl.prompt();
+	rl.on('line', function(line) {
+	    switch(line){
+		  	case "1":
+		  		console.log(player.attack(ogre));
+		  		if(ogre.alive === false || player.alive === false) rl.close();
+					console.log(player.stats());
+					console.log(ogre.stats());
+		  		break;
+		  	case "2":
+		  		ogre.challenge();
+		  		rl.question("Huh, Choose Human! 1, 2 or 3?\n", function(answer){
+						if(ogre.arr[answer - 1]){
+							console.log(ogre.arr);
+		  				console.log("YOU WON, DAMN IT CHLOE");
+		  			} else {
+		  				console.log("SUCK IT BITCH, GAME OVER!");
+		  			}
+		  			rl.close();
+		  		});
+		  		break;
+		  	case "3":
+		  		console.log(player.toString());
+		  		console.log("---------------------------");
+		  		console.log(ogre.toString());
+		  		break;
+		  	default:
+		  		console.log("Opção Inválida");
+		  }
+	}).on('close',function(){
+	    process.exit(0);
+	});
 }
 
 Main();
