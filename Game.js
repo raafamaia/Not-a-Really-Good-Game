@@ -1,4 +1,6 @@
- // U3.W7: Design your own Code Combat Mission
+'use strict'
+
+// U3.W7: Design your own Code Combat Mission
 
 // This is a solo challenge
 
@@ -18,121 +20,56 @@
 
 // Initial Code
 
+var Weapon = require('./models/Weapon');
+var Shield = require('./models/Shield');
+var Player = require('./models/Player');
+var Ogre = require('./models/Ogre');
 
-function Character(cName, hp, sword, shield){
-	this.cName = "";
-	this.hp = hp;
-	this.sword = sword;
-	this.shield = shield;
-	// attack = function(targetHit){
-	// 	targetHit.hp = targetHit.hp - (this.sword.atk - targetHit.shield.defense);
-	// };
-}
+//------------------------------------------------------------------------------
 
-Character.prototype.getHP = function(){
-	return this.hp;
-}
+var defaultWeapon = new Weapon("Sword", 5, 15);
+var defaultShield = new Shield("Shield", 5, 5);
+var ogre = new Ogre("Ogre", 200, defaultWeapon, defaultShield);
+var player = new Player("You", 200, defaultWeapon, defaultShield);
 
-Character.prototype.attack = function(targetHit){
-		targetHit.hp = targetHit.hp - (this.sword.atk - targetHit.shield.defense);
-		console.log(targetHit.hp);
-		dead(targetHit);
-	};
+//------------------------------------------------------------------------------
 
-function Player(cname, hp, sword, shield, packCards){
-	Character.call(this, cname, hp, sword, shield);
-	this.packCards = packCards;
-}
-
-Player.prototype = new Character;
-Player.prototype.constructor = Player;
-
-Player.prototype.playCards = function(cardValue){
-	var randomValue = packCards.values[Math.floor(Math.random() * packCards.values.length)]
-	if(cardValue == randomValue){
-		console.log("You win! Game over!");
-	} else {
-		console.log("I win! Game over!");
-	}
-}
-
-function Ogre(cname, hp, sword, shield){
-	Character.call(this, cname, hp, sword, shield);
-};
-
-function dead(targetHit){
-	if(targetHit.hp <= 0){
-		console.log("DEAD! GAME OVER!");
-	}
-}
-
-
-Ogre.prototype = new Character;
-
-var sword = {
-	atk: 10,
-	resistance: 5
-};
-
-var shield = {
-	defense: 5,
-	resistance: 10
-};
-
-var packCards = {
-	values: [1,2,3,4,5,6,8,9,10,"Q","J","K"]
-};
-
-
-var codeninja = new Player("Code Ninja", 10, sword, shield, packCards);
-var ogre = new Ogre("Ogre", 20, sword, shield);
-
-
+function Main(){
 var readline = require('readline');
 var rl = readline.createInterface(process.stdin, process.stdout);
-rl.setPrompt("1 - Attack \n2 - Play Cards\n");
+rl.setPrompt("1 - Attack \n2 - Play Cards\n3 - Stats\n");
 rl.prompt();
 rl.on('line', function(line) {
     switch(line){
 	  	case "1":
-	  		codeninja.attack(ogre);
-	  		console.log(codeninja.hp);
-	  		if()
+	  		console.log(player.attack(ogre));
+	  		if(ogre.alive === false || player.alive === false) rl.close();
+				console.log(player.stats());
+				console.log(ogre.stats());
 	  		break;
 	  	case "2":
-	  		codeninja.playCards([Math.floor(Math.random() * packCards.values.length)]);
-	  		rl.close();
+	  		ogre.challenge();
+	  		rl.question("Huh, Choose Human! 1, 2 or 3?\n", function(answer){
+					if(ogre.arr[answer - 1]){
+						console.log(ogre.arr);
+	  				console.log("YOU WON, DAMN IT CHLOE");
+	  			} else {
+	  				console.log("SUCK IT BITCH, GAME OVER!");
+	  			}
+	  			rl.close();
+	  		});
+	  		break;
+	  	case "3":
+	  		console.log(player.toString());
+	  		console.log("---------------------------");
+	  		console.log(ogre.toString());
 	  		break;
 	  	default:
 	  		console.log("Opção Inválida");
 	  }
-
 }).on('close',function(){
     process.exit(0);
 });
+}
 
-
-
-// function attack
-
-
-
-
-
-
-// Refactored Code
-
-
-
-
-
-
-// Reflection
-//
-//
-//
-//
-//
-//
-//
-//
+Main();
